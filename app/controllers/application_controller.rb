@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'pry'
 
 class App < Sinatra::Base
 
@@ -10,6 +11,11 @@ class App < Sinatra::Base
 
     post '/teams' do
         
+        @team = Team.new(params["team"])
+        params["team"]["members"].each do |h|
+            Hero.new(h)
+        end
+        @hero = Hero.all
         erb :team
     end
 
